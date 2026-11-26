@@ -356,7 +356,7 @@ async function decryptUrl(keyText) {
 
 const offline = msg => Object.assign(new Error(msg), { offline: true });
 async function resolveBase() {
-  if (info.self) return location.origin;
+  if (info.self) return location.origin + location.pathname.replace(/\/(index\.html)?$/, '');
   if (info.v !== 2 || !info.data) throw offline('电脑端还没有发布地址（或还在用旧版本），请在电脑上重启服务');
   const key = store.get('key');
   if (!key) throw Object.assign(new Error(''), { unpaired: true });
